@@ -35,7 +35,7 @@
             <!--/ 360 viewport -->
 
             <!-- Fullscreen Button -->
-            <abbr title="Fullscreen Toggle">
+            <abbr title="Fullscreen Toggle" v-if="!hideButtons">
                 <div class="v360-fullscreen-toggle text-center" @click="toggleFullScreen">
                     <div class="v360-fullscreen-toggle-btn" :class="(buttonClass == 'dark') ? 'text-light' : 'text-dark'">
                         <i :class="(!isFullScreen) ? 'fas fa-expand text-lg' : 'fas fa-compress text-lg'"></i>
@@ -45,7 +45,7 @@
             <!--/ Fullscreen Button -->
 
             <!-- Buttons Container -->
-            <div id="v360-menu-btns" :class="buttonClass">
+            <div id="v360-menu-btns" :class="buttonClass" v-if="!hideButtons">
                 <div class="v360-navigate-btns">
                     <div class="v360-menu-btns" @click="togglePlay" :class="(playing) ? 'v360-btn-active' : ''">
                         <i class="fa fa-play" v-if="!playing"></i>
@@ -85,6 +85,10 @@ const uuidv1 = require('uuid/v1');
 export default {
     name: 'I360Viewer',
     props: {
+        hideButtons:{
+            type:Boolean,
+            default:false,
+        },
         imagePath: {
             type: String,
             require: true,
