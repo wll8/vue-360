@@ -240,6 +240,9 @@ export default {
         document.addEventListener('mozfullscreenchange', this.exitHandler);
         document.addEventListener('MSFullscreenChange', this.exitHandler);
     },
+    beforeDestroy(){
+        window.removeEventListener('resize', this.resizeWindow);
+    },
     methods: {
         initData(){
             this.checkMobile()
