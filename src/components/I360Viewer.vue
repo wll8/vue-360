@@ -80,7 +80,7 @@
 </template>
 
 <script>
-const uuidv1 = require('uuid/v1');
+import uuidv1 from 'uuid/v1';
 
 export default {
     name: 'I360Viewer',
