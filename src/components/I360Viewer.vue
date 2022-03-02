@@ -35,7 +35,7 @@
             <!--/ 360 viewport -->
 
             <!-- Buttons Container -->
-            <div id="v360-menu-btns" :class="buttonClass">
+            <div id="v360-menu-btns" :class="buttonClass" v-if="!hideButtons">
                 <div class="v360-navigate-btns">
                     <div class="v360-menu-btns" @click="toggleFullScreen">
                         <i :class="(!isFullScreen) ? 'fas fa-expand text-lg' : 'fas fa-compress text-lg'"></i>
@@ -78,6 +78,10 @@ import uuidv1 from 'uuid/v1';
 export default {
     name: 'I360Viewer',
     props: {
+        hideButtons:{
+            type:Boolean,
+            default:false,
+        },
         imagePath: {
             type: String,
             require: true,
@@ -228,6 +232,9 @@ export default {
         document.addEventListener('webkitfullscreenchange', this.exitHandler);
         document.addEventListener('mozfullscreenchange', this.exitHandler);
         document.addEventListener('MSFullscreenChange', this.exitHandler);
+    },
+    beforeDestroy(){
+        window.removeEventListener('resize', this.resizeWindow);
     },
     methods: {
         initData(){
